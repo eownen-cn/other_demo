@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script src="angular.js"></script>
+	<script>
+		/**
+		* 可以省略的代码
+		*/
+		angular.module('cts',[]).controller('myCon',()=>{})
+	</script>
+</head>
+<body>
+	<div ng-app>
+		<div>
+			<input type="text" ng-model="txt">
+			<p>{{txt | uppercase}}</p>
+			<input type="text" ng-model="txt">
+			<p>{{txt | lowercase}}</p>
+		</div>
+	</div>
+</body>
+</html>

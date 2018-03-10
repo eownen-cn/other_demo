@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div ng-app="web04">
+		<div>全局：{{hello}}</div>
+		<div ng-controller="sctrl">
+			局部: {{hello}}
+		</div>
+	</div>
+	<script src="./ref/js/angular.min.js"></script>
+	<script>
+		var web04 = angular.module('web04',[]);
+		web04.controller('sctrl',[
+			'$scope','$rootScope',function( s,f ){
+				s.hello = '局部' ;
+				f.hello = '全局';
+			}
+		]);
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<style type="text/css">
+	input::-webkit-input-placeholder{
+		color:red;
+	}
+</style>
+<div ng-app="shop">
+	<div ng-controller="shopCtrl">
+		<p>
+			<h3>新鲜桂圆30元/千克,买三赠一</h3>
+		</p>
+		<label>
+			<input type="number" placeholder="输入商品数量（KG）" value=0 ng-model="kg" >公斤
+		</label>
+		<h3>{{total()}}<small> 元</small></h3>
+	</div>
+</div>
+<script src="./ref/js/angular.min.js"></script>
+<script type="text/javascript">
+	var shopApp = angular.module('shop',[]);
+	shopApp.controller('shopCtrl',['$scope',function(data){
+		data.kg = '' ;
+		data.total = function (){
+			if (!data.kg){
+				return '' ;
+			}
+			if ( data.kg < 3 ){
+				return data.kg * 30 ;	
+			} else if ( data.kg <= 5 ) {
+				return data.kg * 25 ;
+			} else if ( data.kg <= 10 ) {
+				return data.kg * 20 ;
+			} else {
+				return data.kg * 15;
+			}
+		}
+	}]);
+</script>
+</body>
+</html>

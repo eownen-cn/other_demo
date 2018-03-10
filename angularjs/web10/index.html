@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过滤器的使用</title>
+	<script src="angular.js"></script>
+	<script>
+		var app = angular.module('myapp',[])
+		.controller('mycontrl',($scope,$http,$interval,$timeout)=>{
+			$http.get('data.php')
+			.then(function(response){
+				$scope.getData = function() { // 默认加载所有数据
+					$scope.dataset = response.data;
+				}
+			})
+		})
+	</script>
+	<style>
+		h2{
+			cursor: pointer;
+		}
+		input{
+			font-size: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div ng-app="myapp" ng-controller="mycontrl">
+		<h2 ng-click="getData()">获取数据</h2>
+		<input type="text" ng-model="myfilter">查询
+		<table>
+			<tr>
+				<th>姓名</th>
+				<th>职位</th>
+				<th>年龄</th>
+				<th>地区</th>
+			</tr>
+			<tr ng-repeat="(key, value) in dataset">
+				<td>{{key}}</td>
+				<td>{{value.job}}</td>
+				<td>{{value.age}}</td>
+				<td>{{value.area}}</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

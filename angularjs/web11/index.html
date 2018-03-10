@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$http服务的使用</title>
+	<script src="angular.js"></script>
+	<script>
+		angular.module('myapp',[])
+		.controller('mycontrl',function($scope,$http){
+			$scope.mypost = function(x){
+				console.log('传过来的参数：',x);
+				// $http({ // 1.5版本已废弃
+				// 	method : 'POST',
+				// 	url : 'data.php'
+				// })
+				// .success((...datas)=>{
+				// 	return {...datas};
+				// })
+				// .error((...datas)=>{
+				// 	return {...datas};
+				// })
+
+				$http({ 
+					method : 'POST',
+					url : 'data.php'
+				})
+				.then((...datas)=>{
+					console.log('响应的内容：',[...datas]);
+
+					/*
+					config :
+					{method: "POST", transformRequest: Array(1), transformResponse: Array(1), jsonpCallbackParam: "callback", paramSerializer: ƒ, …}
+					data
+					:
+					{sites: Array(4)}
+					headers
+					:
+					ƒ (name)
+					status
+					:
+					200
+					statusText
+					:
+					"OK"
+					xhrStatus
+					:
+					"complete"
+
+					*/
+					console.log(datas[0].data.sites);
+					$scope.datas = datas[0].data.sites ;
+				})
+			}
+			$scope.sites = {
+			    site01 : "Google",
+			    site02 : "Runoob",
+			    site03 : "Taobao"
+			};
+		})
+	</script>
+	<style>
+
+</style>
+</head>
+<body>
+	<div ng-app="myapp" ng-controller="mycontrl">
+		<input type="text" placeholder="请输入内容" ng-model="txt">
+		<button ng-click = "mypost(txt)">GET</button>
+		<div>
+			<h1>{{datas}}</h1>
+		</div>
+		<select ng-model="selectedSite" ng-options="x for (x, y) in sites">
+		</select>
+
+		<h1>你选择的值是: {{selectedSite}}</h1>
+	</div>
+</body>
+</html>

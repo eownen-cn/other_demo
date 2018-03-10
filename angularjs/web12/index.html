@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>angular表单验证</title>
+	<script src="angular.js"></script>
+	<script>
+		angular.module('myapp',[])
+		.controller('mycontrl',function($scope){
+			$scope.user = 'Denny · Loong' ;
+			$scope.email = 'denny_loong@outlook.com' ;
+		})
+	</script>
+	<style>
+
+</style>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="mycontrl">
+		<form name="fm">
+			<p>
+				<label>
+					用户名：
+					<input type="text" required name="user" ng-model="user">
+					<span style="color:red;" ng-show="fm.user.$dirty && fm.user.$invalid">
+						<span ng-show="fm.user.$error.required">用户名是必须的。</span>
+					</span>
+				</label>
+			</p>
+			<p>
+				<label>
+					邮箱：
+					<input type="email" required name="email" ng-model="email">
+					<span style="color:red;" ng-show="fm.email.$dirty && fm.email.$invalid">
+						<span ng-show="fm.email.$erroe.email">非法的邮箱。</span>
+						<span ng-show="fm.email.$error.required">邮箱是必须的。</span>
+					</span>
+				</label>
+			</p>
+			<p>
+				<input type="submit" ng-disabled="fm.user.$dirty && fm.user.$invalid || fm.email.$dirty && fm.email.$invalid">
+			</p>
+		</form>
+	</div>
+</body>
+</html>

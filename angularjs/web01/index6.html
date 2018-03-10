@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS http(Ajax)</title>
+    <script src="angular.js"></script>
+    <script>
+    angular.module('ms', [])
+        .controller('myctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+            $scope.getEmps = () => {
+                $http.get('index6.php')
+                    .then(function(response) {
+                        $scope.datas = response.data;
+                    });
+            }
+        }])
+        .controller('myctrl2', ['$scope', '$rootScope', '$timeout', ($scope, $rootScope, $timeout) => {
+            $timeout(() => $scope.tip = 'How are you today ?', 2000);
+            $timeout(() => $rootScope.datas = '', 2200); // 无效
+        }])
+        .controller('myctrl3', ['$scope', '$rootScope', '$interval', ($scope, $rootScope, $interval) => {
+            $scope.theTime = new Date().toLocaleTimeString();
+            $interval(function() {
+                $scope.theTime = new Date().toLocaleTimeString();
+            }, 1000);
+        }])
+    </script>
+</head>
+
+<body>
+    <div ng-app='ms'>
+        <div ng-controller="myctrl">
+            <button ng-click="getEmps()">GET职员信息</button>
+            <table border="1">
+                <tr>
+                    <th>姓名</th>
+                    <th>岗位</th>
+                    <th>年龄</th>
+                    <th>地区</th>
+                </tr>
+                <tr ng-repeat="(k,v) in datas">
+                    <td>{{k}}</td>
+                    <td>{{v.job}}</td>
+                    <td>{{v.age}}</td>
+                    <td>{{v.area}}</td>
+                </tr>
+            </table>
+        </div>
+        <div ng-controller="myctrl2">
+            <h1>{{tip}}</h1>
+        </div>
+        <div ng-controller="myctrl3">
+            当前时间：<h1>{{theTime}}</h1>
+        </div>
+    </div>
+</body>
+
+</html>

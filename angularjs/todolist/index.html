@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="01.css">
+</head>
+
+<body>
+    <div class="page-top">
+        <div class="page-content">
+            <h2>ToDoList</h2>
+        </div>
+    </div>
+    <div class="main">
+        <h3 class="big-title">AddTodos：</h3>
+        <input 
+        placeholder="填写你的任务" 
+        type="text" 
+        class="task-input"
+        @keyup.13='addTodo'
+        v-model="todo"
+        >
+        <ul class="task-count">
+            <li v-show="list.length">{{notComplete}}个任务未完成</li>
+            <li class="action">
+	            <a href="#all" :class="{active:value == 'all'}">All</a>
+	            <a href="#todo" :class="{active:value == 'todo'}">ToDo</a>
+                     <a href="#completed" :class="{active:value == 'completed'}">Completed</a>
+            </li>
+        </ul>
+        <h3 class="big-title">ToDoList：</h3>
+        <div class="tasks">
+        <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
+            <ul class="todo-list">
+                <li class="todo" v-for="item in filtedList" :class="{completed:item.isChecked,editing:item === editor}">
+                    <div class="view">
+                        <input type="checkbox" class="toggle" v-model="item.isChecked">
+                        <label @dblclick='editorTodo(item)'>{{item.title}}</label>
+                        <button class="destroy" @click="deleteTodo(item)"></button>
+                    </div>
+                    <input type="text"  
+                    v-focus="item === editor"
+                    class="edit"
+                    @blur='confirmTodo'
+                    @keyup.13="confirmTodo"
+                    @keyup.esc='cancleTodo(item)'
+                     v-model="item.title">
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="./vue.js"></script>
+<script type="text/javascript" src="./app.js"></script>
+</html>

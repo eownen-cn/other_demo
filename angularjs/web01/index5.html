@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Scope(作用域)</title>
+    <script src="angular.js"></script>
+    <script>
+    angular.module('scope', [])
+        .controller('myctrl', function($scope, $rootScope) {
+            $scope.result = function(n) {
+                return (re = n || 0) * 10;
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <div ng-app='scope'>
+        <div ng-controller="myctrl">
+            <p>
+                芒果10元一公斤，输入购买数量
+            </p>
+            <p>
+                <input type="text" ng-model="num"> KG
+            </p>
+            <h1>结果:{{result(num) | currency}}</h1>
+            <p ng-init = "peoples=[{name:'小明',country:'北京'},{name:'小王',country:'上海'},{name:'小黑',country:'天津'},{name:'小李',country:'成都'}]">
+                <input type="text" ng-model="test">
+            </p>
+            <ul>
+                <li ng-repeat="x in peoples | filter:test | orderBy:'country'">
+                    {{ (x.name | uppercase) + ' | ' + x.country }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

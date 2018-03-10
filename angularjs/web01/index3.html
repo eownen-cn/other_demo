@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Scope(作用域)</title>
+    <script src="angular.js"></script>
+    <script>
+        angular.module('scope',[])
+        .controller('myctrl',function($scope,$rootScope){
+            $rootScope.carname = 'hello angular' ; // 全局作用域，类比Windows就像window.carname
+            $scope.carname1 = 'hello angular' ;
+        })
+        .controller('myctrl2',function($scope){
+            $scope.carname2 = 'hello angular' ;
+            $scope.carname3 = 'hello angular' ;
+        })
+    </script>
+</head>
+<body>
+    <div ng-app='scope'>
+        <h1 ng-controller="myctrl">carname1 == carname2 ====> {{carname1==carname2}}</h1> <!-- false -->
+        <h1 ng-controller="myctrl2">carname2 == carname3 ====> {{carname2==carname3}}</h1> <!-- true -->
+        <h1 ng-controller="myctrl2">$rootScope.carname == carname3 ====> {{carname==carname3}}</h1> <!-- true -->
+    </div>
+</body>
+</html>

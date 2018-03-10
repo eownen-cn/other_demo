@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bool">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>布尔超市</h1>
+	<div ng-controller="shop">
+		<p>商品单价：<input type="text" name="price" ng-model="goods.price" readonly="readonly"></p>
+		<p>商品数量：<input type="text" name="num" ng-model='goods.num'></p>
+		<p>商品总价：<input type="text" name="totle" ng-value="goods.num*goods.price" readonly="readonly"></p>
+	</div>
+</body>
+<script src="./ref/js/angular.min.js"></script>
+<script>
+	var myModule = angular.module('bool',[]);
+	myModule.controller("shop",["$scope",function($scope){
+		$scope.goods = {
+			price:12,
+			num:0
+		};
+	}])
+</script>
+</html>

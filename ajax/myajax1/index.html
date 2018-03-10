@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>普通表单的提交与请求数据</title>
+    <style>
+        #box{width: 300px;height: 40px;border-radius: 15px;background: gray;position: relative;}
+        #wrap{width: 0;height: 40px;border-radius: 15px;background: #2d842d;}
+        #text{height: 40px;width:100%;text-align:right;font-size: 20px;line-height: 40px;color: #00f58b;}
+    </style>
+</head>
+<body>
+    <!-- 使用get方式提交 -->
+<!--     <form action="/php/myajax1.php" method="get">
+        <input type="text" name="username">
+        <input type="submit" value="以GET方式向后台发送数据">
+    </form>  -->
+    <!-- 使用post方式提交 -->
+<!--     <form action="/php/myajax1.php" method="POST">
+        <input type="text" name="username">
+        <input type="submit" value="以POST方式向后台发送数据 -- 相对路劲">
+    </form>  -->
+    <!-- 使用post方式提交 -->
+<!--     <form action="http://www.ajax.com/php/myajax1.php" method="POST">
+        <input type="text" name="username">
+        <input type="submit" value="以POST方式向后台发送数据 -- 绝对路劲">
+    </form>  -->
+    <!-- 使用ajax方式提交 -->
+    <!-- <form>
+        <input type="text" id="ajaxGetInput" name="username">
+        <input type="button" id="ajaxGetBtn" value="使用Ajax以GET方式向后台发送数据 -- 相对路劲">
+    </form>  -->
+    <!-- 使用ajax方式提交 -->
+    <!-- <form id="ajaxPostForm">
+        <input type="text" id="ajaxPostInput" name="username">
+        <input type="button" id="ajaxPostBtn" value="使用Ajax以POST方式向后台发送数据 -- 相对路劲">
+    </form>  -->
+    <!-- 使用ajax加载json数据提交 -->
+   <!--  <form id="ajaxPostFromJson">
+        <input type="text" id="pageIndex" name="username">
+        <input type="button" id="ajaxPostPageBtn" value="使用Ajax以POST方式向后台请求分页数据 -- 相对路劲">
+    </form>  -->
+    <!-- 使用ajax实现无刷新上传 -->
+    <form id="myUploadForm">
+        <input type="file" id="upfile">
+        <!-- <input type="text" name="name"> -->
+        <!-- <input type="button" id="up" value="使用Ajax无刷新文件上传"> -->
+        <input type="submit" id="up" value="使用Ajax无刷新文件上传">
+    </form> 
+    <div id="box">
+        <div id="wrap"><div id="text">0%</div></div>
+    </div>
+    <script>
+        // onload = function (){
+            // ajaxGetBtn.onclick = function (form){
+            //     var xhr = new XMLHttpRequest() ,
+            //         respText = null , 
+            //         _respText = null ;
+            //     xhr.onreadystatechange = function (){
+            //         if ( this.readyState === 4 && this.status === 200 ){
+            //             console.log( this.responseText ) ;
+            //         }
+            //     }
+            //     console.log(ajaxGetInput.value) ;
+            //     xhr.open('get','/php/myajax1.php?username='+ ajaxGetInput.value + '&' + Math.random(), true) ;
+            //     xhr.send(null) ;
+            // }
+            // ajaxPostBtn.onclick = function (){
+            //     var xhr = new XMLHttpRequest() ,
+            //         respText = null , 
+            //         _respText = null ;
+            //     xhr.onreadystatechange = function (){
+            //         if ( this.readyState === 4 && this.status === 200 ){
+            //             console.log( this.responseText ) ;
+            //         }
+            //     }
+            //     console.log(ajaxPostInput.value) ;
+            //     xhr.open('post','/php/myajax1.php', true) ;
+            //     // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            //     // xhr.send(`username=${ajaxPostInput}&tamp=${Math.random()}`) ; //html5之前的方法
+            //     var f = new FormData() ; // html5扩展
+            //     f.append('username',ajaxPostInput.value) ;
+            //     xhr.send(f);
+            // }
+            // var ul = null ;
+            // ajaxPostPageBtn.onclick = function (){
+            //     var xhr = new XMLHttpRequest();
+            //     xhr.onreadystatechange = function (){
+            //         var parsedText = null ;
+            //         if ( this.readyState === 4 && this.status === 200 ){
+            //             console.log( this.responseText ) ;
+            //             parsedText = JSON.parse(this.responseText) ;
+            //             if ( !ul ) {
+            //                 ul = document.createElement('ul') ;
+            //             }
+            //             var li = document.createElement('li') ;
+            //             li.textContent = parsedText.name ;
+            //             ul.appendChild(li) ;
+            //             console.info(ul,li,parsedText) ;
+            //             document.body.appendChild(ul) ;
+            //         }
+            //     }
+            //     console.log(ajaxPostInput.value) ;
+            //     xhr.open('post','/php/myajax1.php', true) ;
+            //     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            //     xhr.send(`index=${pageIndex.value}&tamp=${Math.random()}`) ; 
+            // }
+            /**
+             * Ajax文件上传 FormData();
+             * @return {[type]} [description]
+             */
+            up.onclick = function (){
+
+            //     var xhr = new XMLHttpRequest();
+            //     // xhr.onload = function ( ev ) {  // 官方推荐监听器
+            //     //     console.timeEnd() ;
+            //     //     console.log('timeEnd') ;
+            //     //     console.log(ev) ;
+            //     // }
+            //     // xhr.upload.onprogress = function ( ev ){ 
+            //     //     let [ c , o ] = [ ev.total , ev.loaded ] , rate = 0 ;
+            //     //     rate = o / c ;
+            //     //     wrap.style.width = Number.parseInt(rate * 300) + 'px' ;
+            //     //     text.textContent = Number.parseInt(rate * 100) + '%' ;
+            //     //     console.log( o * 1024 ) ;
+            //     // }
+                var s = new FormData() ;
+                // console.log(upfile.files[0])
+                s.append('file',upfile.files[0]) ;
+                xhr.open('post','/php/ajax_upload.php',true) ; 
+                // xhr.setRequestHeader('X-Request-Width','XMLHttpRequest') ;
+                // xhr.setRequestHeader('Content-type','multipart/form-data') ;
+                xhr.send(s);
+                // console.log('timeStart') ;
+                console.time() ;
+                
+            }
+
+        // }
+    </script>
+</body>
+</html>

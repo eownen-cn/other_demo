@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular四个全局API</title>
+	<script src="angular.js"></script>
+	<script>
+		angular.module('myapp',[])
+		.controller('mycontrl',function($scope,$rootScope){
+			$rootScope.user = 'null';
+			$scope.result = function(u){
+				return angular.uppercase(u);
+			}
+			$scope.isstr = function(u){
+				return u.length && !parseFloat(u) ? true : false;
+			}
+			$scope.isnum = function(u){
+				return parseFloat(u) ? true : false;
+			}
+		})
+	</script>
+	<style>
+
+</style>
+
+</head>
+<body ng-app="myapp">
+	<div ng-controller="mycontrl">
+		<p>
+			<input type="text" name="user" ng-model="user">
+			<p>变大写：{{result(user)}}</p>
+			<p>变小写：{{result(user) | lowercase}}</p>
+			<p>isString()：{{isstr(user)}}</p>
+			<p>isNumber()：{{isnum(user)}}</p>
+			<p ng-include="'site.htm'" scope="" onload=""></p>
+		</p>
+		
+	</div>
+</body>
+</html>

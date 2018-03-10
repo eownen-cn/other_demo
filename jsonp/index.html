@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索</title>
+</head>
+<body>
+    <input type="text" id="t" placeholder="输入搜索内容">
+    <script>
+        var _data , ul = null , lis = '';
+        function callback( data ){
+            _data = data.s ;
+            console.log(_data) ;
+            if ( !ul ) ul = document.createElement('ul') ;
+            if ( lis ) lis = '' ;
+            for ( var i = 0 , len = _data.length ; i < len ; i ++ ){
+                lis += `<li>${_data[i]}</li>`
+            }
+            ul.innerHTML = lis ;
+            document.body.appendChild(ul) ;
+        }
+        t.onkeyup = function (){
+            var script = document.createElement('script') ;
+            var tsp = new Date().getTime() ;
+            var requestUrl = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${this.value}&json=1&p=3&sid=1438_21127_20930&req=2&csor=1&pwd=%20&cb=callback&tp=${tsp}`;
+            // 造一个script动态插入HTML中
+            script.src = requestUrl ;
+            document.documentElement.getElementsByTagName('head')[0].appendChild(script) ;
+
+        }
+    </script>
+</body>
+</html>

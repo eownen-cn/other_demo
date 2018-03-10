@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人脸识别API</title>
+</head>
+<body>
+    <input type="button" value="识别" id="btn">
+    <script>
+        onload = function (){
+            btn.onclick = function (){
+                let ajax = new XMLHttpRequest() ;
+                ajax.onreadystatechange = function (){
+                    if ( this.status === 200 ){
+                        console.log(this.responseText) ;
+                    }
+                }
+                // 打开一个接口
+                ajax.open('post','http://rltz.market.alicloudapi.com/face/detect',true) ;
+                // 创建数据body
+                let body = {
+                    "type":0,
+                    "img_url":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1506685111645&di=23d59a0957b1754d128da5451e263d86&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D564603091%2C662953605%26fm%3D214%26gp%3D0.jpg",
+                    "content":""
+                }
+                ajax.send(body) ;
+            }
+        }
+    </script>
+</body>
+</html>

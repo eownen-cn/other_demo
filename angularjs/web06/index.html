@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mod">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p happy>A(默认)</p>
+	<happy>
+		<div>E</div>
+	</happy>
+	<div class="happy">
+		C
+	</div>
+	<!-- directive:happy -->
+</body>
+<script src="./ref/js/angular.min.js"></script>
+<script>
+	var module = angular.module('mod',[]);
+	module.directive('happy',function(){
+		return {
+			restrict:'A,C,E,M',
+			transclude:true,
+			template:'<h3>今天天气不错!</h3>'
+		}
+	})
+</script>
+</html>

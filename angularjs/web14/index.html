@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS 动画</title>
+	<script src="angular.js"></script>
+	<script src="angular-animate.js"></script>
+	<script>
+		angular.module('myapp',['ngAnimate'])
+	</script>
+	<style>
+		.mydiv{width: 300px;height: 300px;background: coral;}
+	</style>
+</style>
+
+</head>
+<body ng-app="myapp">
+	<div>
+		显示 / 隐藏
+		<input type="checkbox" ng-model="mycheck">
+		<div class="mydiv" ng-hide="mycheck"></div>
+	</div>
+</body>
+</html>

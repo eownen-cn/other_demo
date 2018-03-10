@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS 服务(Service)</title>
+	<script src="angular.js"></script>
+	<script>
+		angular.module('myap',[])
+		.controller('myct',function($scope,$http){
+			$scope.get = () =>{
+				$http.get('data2.php')
+				.then(data=>$scope.mctx=data.data.sort((a,b)=>Math.random()>0.5));
+			}
+		})
+		.controller('myct2',function($scope,$location,$rootScope){
+			$rootScope.data = $scope.see = function(){
+				let obj = $location ;
+				return angular.toJson({
+					"url":obj.absUrl(), // 整个地址
+					"host":obj.host(), // 主机
+					"path":obj.path(), // 子路劲
+					"hash":obj.hash(), // URL的哈希值
+					"protocol":obj.protocol(), // 协议类型
+					"port":obj.port(), // 端口
+					"search":obj.search() // 参数的json表现形式
+				},true);
+			}
+		})
+		.controller('zhengli',function($scope,$rootScope){
+			$scope.show = function(){
+				$scope.dataset = [angular.fromJson($rootScope.data())] ;
+				test.innerHTML = "";
+			}
+		})
+	</script>
+	<style>
+		ul{
+			padding:20px 5px;
+			border:2px outset lightblue;
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<div ng-app="myap">
+		<div ng-controller="myct">
+			<button ng-click="get()">使用angular内置的$http服务随机请求一些服务器的内容</button>
+			<div ng-repeat="v in mctx">{{v}}</div>
+		</div>
+		<div ng-controller="myct2">
+			<div id="test">{{see()}}</div>
+		</div>
+		<div ng-controller="zhengli">
+			<button ng-click = "show()">整理</button>
+			<div>
+				<ul ng-repeat="v in dataset">
+					<li>{{ 'url' + ' : ' + v["url"]}}</li>
+					<li>{{ 'host' + ' : ' + v["host"]}}</li>
+					<li>{{ 'path' + ' : ' + v["path"]}}</li>
+					<li>{{ 'hash' + ' : ' + v["hash"]}}</li>
+					<li>{{ 'protocol' + ' : ' + v["protocol"]}}</li>
+					<li>{{ 'port' + ' : ' + v["port"]}}</li>
+					<li>{{ 'search' + ' : ' + v["search"].toString()}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

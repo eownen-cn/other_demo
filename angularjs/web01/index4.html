@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Scope(作用域)</title>
+    <script src="angular.js"></script>
+    <script>
+        angular.module('scope',[])
+        .controller('myctrl',function($scope,$rootScope){
+            $scope.result = function(n){
+                return ( re = n || 0 ) * 10 ;
+            }
+        })
+    </script>
+</head>
+<body>
+    <div ng-app='scope'>
+        <div ng-controller="myctrl">
+            <p>
+                芒果10元一公斤，输入购买数量
+            </p>
+            <p>
+                <input type="text" ng-model="num"> KG
+            </p>
+            <h1>结果:{{result(num)}}</h1>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div ng-app="web03">
+		<div ng-controller="helloController">
+			<p>
+				<ul ng-repeat="obj in ulist">
+					<li>
+						作者:{{obj.author}}
+					</li>
+					<li>
+						年龄:{{obj.age}}
+					</li>
+					<li>
+						地区:{{obj.area}}
+					</li>
+				</ul>
+			</p>
+		</div>
+	</div>
+	<script src="./ref/js/angular.min.js"></script>
+	<script>
+		var web03 = angular.module('web03',[]);
+		web03.controller('helloController',[
+			'$scope',function( data ){
+				data.ulist = [
+					{author:'Denny',age:15,area:'BeiJing'},
+					{author:'Jack',age:18,area:'TianJing'},
+					{author:'Bloo',age:21,area:'ShangHai'}
+				];
+			}
+		]);
+	</script>
+</body>
+</html>

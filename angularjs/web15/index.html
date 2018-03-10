@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS 动画</title>
+    <script src="angular.js"></script>
+    <script src="angular-animate.js"></script>
+    <script>
+    angular.module('myapp', ['ngAnimate'])
+    </script>
+    <style>
+    .mydiv {}
+
+    .ng-hide-add {
+        width: 300px;
+        height: 300px;
+        background: coral;
+        opacity: 1;
+        transition: 1s;
+    }
+
+    .ng-hide-add-active {
+        width: 0px;
+        height: 0px;
+        background: coral;
+        opacity: 0;
+    }
+    </style>
+    </style>
+    <script>
+    function Foo() { 
+        var i = 0; 
+        return function() { 
+            document.write(i++); 
+        } 
+    }
+    var f1 = Foo(),
+        f2 = Foo();
+    f1();
+    f1();
+    f1();
+    f2();
+    f2();
+    var x=0;
+    switch(++x)
+    {
+    case 0: ++x;
+    case 1: ++x;
+    case 2: ++x;
+    }
+    console.log(x) ;
+    var x = Boolean(false);
+    if (x) {
+      alert('hi');
+    }
+    var y = new Boolean(0);
+    if (y) {
+      alert('hello'); 
+    }
+    console.log('-------------------华丽的分割线-------------------') ;
+    console.log(typeof null);
+    console.log(typeof undefined);
+    console.log(typeof NaN);
+    console.log(NaN == undefined);
+    console.log(NaN == NaN);
+    var str = "123abc";
+    console.log(typeof str++);
+    console.log(str);
+    </script>
+</head>
+
+<body ng-app="myapp">
+    <div>
+        显示 / 隐藏
+        <input type="checkbox" ng-model="mycheck">
+        <div class="ng-hide" ng-hide="mycheck"></div>
+    </div>
+</body>
+
+</html>

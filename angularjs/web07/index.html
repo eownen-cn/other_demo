@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bool">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div ng-view></div>
+</body>
+<script src="http://cdn.bootcss.com/angular.js/1.4.6/angular.js"></script>
+<script src="http://cdn.bootcss.com/angular.js/1.4.6/angular-route.js"></script>
+<script>
+	var courseCtrls = angular.module('courseCtrls', []);
+	var myModule = angular.module('bool',['ngRoute','courseCtrls']);
+	myModule.config(['$routeProvider',function($routeProvider) {
+		$routeProvider
+		.when("/hello",{
+			template:"<p>欢迎学习{{text}}课程</p><p><a href='#/list'>课程列表</a></p>",
+			controller:'HelloCtrl'
+		})
+		.when("/list",{
+			template:'<ul ng-repeat="x in courses"><li>{{x.name}}'+":"+'{{x.content}}</li></ul><p><a href="#/hello">首页</a></p>',
+			controller:"CourseListCtrl"
+		})
+		.otherwise({
+			redirectTo:"/hello"
+		});
+	}]);
+	courseCtrls.controller('HelloCtrl', ['$scope', function($scope){
+		$scope.text = "AngularJS";
+	}]);
+	courseCtrls.controller('CourseListCtrl', ['$scope', function($scope){
+		$scope.courses = [
+		{name:"AngularJS的设计思想",content:"通过小例子来引入AngularJS的思想"},
+		{name:"AngularJS的核心概念",content:"介绍AngularJS的MVC，模块化，指令系统及双向数据绑定"}
+		]
+	}])
+</script>
+</html>

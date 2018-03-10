@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script src="angular.js"></script>
+</head>
+<body>
+	<div ng-app ng-init="person=['永凌',18,'前端工程师']">
+		<p ng-bind="person[2]"></p>
+		<ul>
+			<li ng-repeat="(k,v) in person">{{v}}</li>
+		</ul>
+	</div>
+</body>
+</html>
