@@ -3,21 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>搜索</title>
+    <style type="text/css">
+    	
+    	.e{
+    		height: 50px;
+    		line-height: 50px;
+    		font:oblique 18px/25px consolas arial,sans-serif ;
+    		position: absolute;
+    		top:0;
+    		right:0;
+    		bottom:0;
+    		left:0;
+    		margin:auto;
+    		width: 320px;
+    		border: 1px solid lightblue ;
+    		border-radius: 15px ;
+    		box-shadow:1px 1px 4px lightcoral;
+    		box-sizing: border-box;
+    		text-overflow: hidden;
+    		outline: none;
+    		text-align: center;
+    	}
+    	.i{
+    		
+    	}
+    </style>
 </head>
 <body>
-    <input type="text" id="t" placeholder="输入搜索内容">
+	<input class="e" type="text" id="t" placeholder="输入搜索内容">
     <script>
-        var _data , ul = null , lis = '';
+        var _data , ol = null , lis = '';
         function callback( data ){
             _data = data.s ;
             console.log(_data) ;
-            if ( !ul ) ul = document.createElement('ul') ;
+            if ( !ol ) ol = document.createElement('ol') ;
+            ol.style="position: absolute;left: 45%;top:100px;margin: auto;";
             if ( lis ) lis = '' ;
             for ( var i = 0 , len = _data.length ; i < len ; i ++ ){
                 lis += `<li>${_data[i]}</li>`
             }
-            ul.innerHTML = lis ;
-            document.body.appendChild(ul) ;
+            ol.innerHTML = lis ;
+            document.body.appendChild(ol) ;
         }
         t.onkeyup = function (){
             var script = document.createElement('script') ;
